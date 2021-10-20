@@ -9,4 +9,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SistemaDeVotacao.Domain\SistemaDeVotacao.Domain.csproj" />
+      <ProjectReference Include="..\SistemaDeVotacao.Infra.Data\SistemaDeVotacao.Infra.Data.csproj" />
+    </ItemGroup>
+
 </Project>

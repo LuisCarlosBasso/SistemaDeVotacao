@@ -11,6 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SistemaDeVotacao.Domain.Handlers;
+using SistemaDeVotacao.Domain.Interfaces.Repositories;
+using SistemaDeVotacao.Infra.Data.DataContexts;
+using SistemaDeVotacao.Infra.Data.Repositories;
+using SistemaDeVotacao.Infra.Data.Repositories.Queries;
+using SistemaDeVotacao.Infra.Settings;
 
 namespace SistemaDeVotacao
 {
@@ -23,9 +29,38 @@ namespace SistemaDeVotacao
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region AppSettings
+
+            AppSettings appSettings = new AppSettings();
+            Configuration.GetSection("AppSettings").Bind(appSettings);
+            services.AddSingleton(appSettings);
+            
+            #endregion
+
+            #region DataContexts
+
+            services.AddScoped<DataContext>();
+
+            #endregion
+
+            #region Repositories
+
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IFilmeRepository, FilmeRepository>();
+            services.AddTransient<IVotoRepository, VotoRepository>();
+
+            #endregion
+
+            #region Handlers
+
+            services.AddTransient<UsuarioHandler, UsuarioHandler>();
+            services.AddTransient<FilmeHandler, FilmeHandler>();
+            services.AddTransient<VotoHandler, VotoHandler>();
+
+            #endregion
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -33,7 +68,6 @@ namespace SistemaDeVotacao
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

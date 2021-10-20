@@ -18,7 +18,8 @@ namespace SistemaDeVotacao.Infra.Data.DataContexts
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine(e);
+                throw;
             }
         }
 
@@ -30,7 +31,8 @@ namespace SistemaDeVotacao.Infra.Data.DataContexts
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine(e);
+                throw;
             }
         }
     }
