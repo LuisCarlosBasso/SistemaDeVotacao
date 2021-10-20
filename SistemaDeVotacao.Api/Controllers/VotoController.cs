@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaDeVotacao.Domain.Commands.Inputs.Voto;
 using SistemaDeVotacao.Domain.Handlers;
@@ -12,6 +13,7 @@ namespace SistemaDeVotacao.Controllers
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
+    [Authorize]
     [Route("v1/api")]
     public class VotoController : ControllerBase
     {

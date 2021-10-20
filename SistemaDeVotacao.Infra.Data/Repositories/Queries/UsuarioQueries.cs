@@ -9,10 +9,12 @@
 
         public static string Excluir = @"DELETE FROM usuarios WHERE IdUsuario=@Id";
 
-        public static string Listar = @"SELECT IdUsuario as Id, Nome as Nome, Login as Login FROM usuarios;";
+        public static string Listar = @"SELECT IdUsuario, Nome as Nome, Login as Login FROM usuarios;";
 
-        public static string Obter = @"SELECT IdUsuario as Id, Nome as Nome, Login as Login FROM usuarios where IdUsuario=@Id;";
+        public static string Obter = @"SELECT IdUsuario, Nome as Nome, Login as Login FROM usuarios where IdUsuario=@Id;";
 
         public static string CheckId = @"SELECT IdUsuario FROM usuarios WHERE IdUsuario=@Id;";
+
+        public static string Autenticar = @"SELECT IdUsuario FROM usuarios WHERE Login=@Login AND Senha=@Senha";
     }
 }

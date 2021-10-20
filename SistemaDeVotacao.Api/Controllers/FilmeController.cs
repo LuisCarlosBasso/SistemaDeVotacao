@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaDeVotacao.Domain.Commands.Inputs.Filme;
 using SistemaDeVotacao.Domain.Handlers;
@@ -10,6 +11,7 @@ namespace SistemaDeVotacao.Controllers
 {
     [Consumes("application/json")]
     [Produces("application/json")]
+    [Authorize]
     [ApiController]
     [Route("api/v1")]
     public class FilmeController : ControllerBase

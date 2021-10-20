@@ -111,5 +111,21 @@ namespace SistemaDeVotacao.Infra.Data.Repositories
                 throw;
             }
         }
+
+        public bool Autenticar(string login, string senha)
+        {
+            try
+            {
+                _parameters.Add("Login", login, DbType.String);
+                _parameters.Add("Senha", senha, DbType.String);
+                return _dataContext.MySqlConnection.Query<bool>(UsuarioQueries.Autenticar, _parameters)
+                    .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

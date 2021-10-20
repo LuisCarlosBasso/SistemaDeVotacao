@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SistemaDeVotacao.Domain.Commands.Inputs.Usuario;
 using SistemaDeVotacao.Domain.Handlers;
@@ -12,6 +13,7 @@ namespace SistemaDeVotacao.Controllers
     [Consumes("application/json")]
     [Produces("application/json")]
     [ApiController]
+    [Authorize]
     [Route("api/v1")]
     public class UsuarioController : ControllerBase
     {
@@ -24,6 +26,7 @@ namespace SistemaDeVotacao.Controllers
             _handler = handler;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("usuario")]
         public ICommandResult InserirUsuario([FromBody] AdicionarUsuarioCommand command)
